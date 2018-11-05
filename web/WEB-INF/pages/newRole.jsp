@@ -12,17 +12,11 @@
         <title>Новый читатель</title>
     </head>
     <body>
-        <h1>Добавляем в библиотеку нового читателя</h1>
-        <form action="addReader" method="POST" name="form1" id="_form1">
-             Имя:<br>
-            <input type="text" name="name"><br>
-             Фамилия:<br>
-            <input type="text" name="surname"><br>
-             Телефон:<br>
-            <input type="text" name="phone"><br>
-             Город<br>
-            <input type="text" name="city"><br>
-            <br>
+        <h1>Добавляем role</h1>
+        ${info}
+        <form action="addRole" method="POST" name="form1" id="_form1">
+             Имя role:<br>
+            <input type="text" name="nameRole"><br>
             <input type="submit" value="Добавить">
         </form><br>
         

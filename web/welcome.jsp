@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Навигация по сайту</h1>
-        ${textToPage}<br>
+        ${info}<br>
         <a href="newBook">добавить книгу</a><br>
         <a href="newReader">добавить читателя</a><br>
         <a href="showBooks">Список книг</a><br>
@@ -21,6 +21,11 @@
         <a href="library">Выдать книгу</a><br>
         <a href="showTakeBook">Список выданных книг</a>
         <br>
+        <p>Для администратора:</p>
+        <a href="newRole">Новая роль</a>
+        <br>
+        <a href="editUserRoles">Назначение ролей пользователям</a>
+        <br><br>
         Добавлена книга:<br>
         Название: ${book.nameBook}<br>
         Автор: ${book.author}

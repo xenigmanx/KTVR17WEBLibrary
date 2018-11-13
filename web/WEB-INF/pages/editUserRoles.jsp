@@ -25,7 +25,8 @@
                     <option value="${role.id}">${role.name}</option>
                 </c:forEach>
             </select>
-            <input type="submit" value="Назначить">
+            <input type="submit" name="setButton" value="Назначить">
+            <input type="submit" name="deleteButton" value="Удалить">
         </form>
     </body>
 </html>

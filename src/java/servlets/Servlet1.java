@@ -42,7 +42,7 @@ public class Servlet1 extends HttpServlet {
         }else if("/page2".equals(path)){
             textToPage = "Текст для вставки в страницу page2";
             request.setAttribute("textToPage", textToPage);
-            request.getRequestDispatcher(PageReturner.getPage("welcom")).forward(request, response);
+            request.getRequestDispatcher(PageReturner.getPage("welcome")).forward(request, response);
         }
     }
 

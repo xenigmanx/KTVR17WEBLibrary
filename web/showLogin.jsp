@@ -24,6 +24,8 @@
             <input type="password" name="password"><br>
              <input type="submit" value="войти">
         </form><br>
+        <a href="showLogin"зарегистрироваться></a>
+        <a href="newReader"зарегистрироваться></a>
         
     </body>
 </html>

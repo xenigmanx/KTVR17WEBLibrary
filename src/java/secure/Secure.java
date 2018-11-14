@@ -7,7 +7,9 @@ package secure;
 
 import entity.Reader;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,11 +26,10 @@ import util.PageReturner;
  *
  * @author Melnikov
  */
-@WebServlet( name =  "Secure", urlPatterns = {//loadStartUp
+@WebServlet(loadOnStartup = 1, name =  "Secure", urlPatterns = {//loadOnStartup
     "/login",
+    "/logout",
     "/showLogin",
-    "/newRole",
-    "/addRole",
     "/editUserRoles",
     "/changeUserRole"
 })
@@ -106,39 +107,26 @@ public class Secure extends HttpServlet {
         case "/showLogin":
             request.getRequestDispatcher(PageReturner.getPage("showLogin")).forward(request, response);
             break;
-        case "/newRole":
-            if(!"ADMIN".equals(sl.getRole(regUser))){
-                request.getRequestDispatcher(PageReturner.getPage("showLogin")).forward(request, response);
-                break;
-            }
-            request.getRequestDispatcher(PageReturner.getPage("newRole")).forward(request, response);
+        case "/logout":
+            if (session != null)
+                session.invalidate();
+            request.getRequestDispatcher(PageReturner.getPage("welcome")).forward(request, response);
             break;
-        case "/addRole":
-            if(!"ADMIN".equals(sl.getRole(regUser))){
-                request.getRequestDispatcher(PageReturner.getPage("showLogin")).forward(request, response);
-                break;
-            }
-            String nameRole = request.getParameter("nameRole");
-            Role role = new Role();
-            role.setName(nameRole.toUpperCase());
-            try {
-                if(!role.getName().isEmpty()){
-                   roleFacade.create(role); 
-                }
-            } catch (Exception e) {
-               request.setAttribute("info", "Такая роль уже существует");
-            }
-            request.getRequestDispatcher(PageReturner.getPage("newRole")).forward(request, response);
-            break;
-            
+        
         case "/editUserRoles":
             if(!"ADMIN".equals(sl.getRole(regUser))){
                 request.getRequestDispatcher(PageReturner.getPage("showLogin")).forward(request, response);
             break;
             }
+            Map<Reader,String> mapUsers = new HashMap<>();
             List<Reader> listUsers = readerFacade.findAll();
+            int n =listUsers.size();
+            for(int i=0; i<n; i++){
+//Entry (key,value)
+                mapUsers.put(listUsers.get(i),sl.getRole(listUsers.get(i)));
+            }
             List<Role> listRoles = roleFacade.findAll();
-            request.setAttribute("listUsers", listUsers);
+            request.setAttribute("mapUsers", mapUsers);
             request.setAttribute("listRoles", listRoles);
             request.getRequestDispatcher(PageReturner.getPage("editUserRoles")).forward(request, response);
             break;
@@ -163,10 +151,19 @@ public class Secure extends HttpServlet {
                 sl.deleteRoleToUser(ur.getReader());
             }
                 
-            List<Reader> newListUsers = readerFacade.findAll();
-            List<Role> newListRoles = roleFacade.findAll();
-            request.setAttribute("listUsers", newListUsers);
-            request.setAttribute("listRoles", newListRoles);
+            listUsers = readerFacade.findAll();
+            listRoles = roleFacade.findAll();
+            mapUsers = new HashMap<>();
+            n = listUsers.size();
+            for(int i=0; i<n; i++)
+            {
+//Entry (key,value)
+            mapUsers.put(listUsers.get(i),sl.getRole(listUsers.get(i)));
+            }
+            
+            request.setAttribute("mapUsers", mapUsers);
+            
+            request.setAttribute("listRoles", listRoles);
             request.getRequestDispatcher(PageReturner.getPage("editUserRoles")).forward(request, response);
             break;
             }

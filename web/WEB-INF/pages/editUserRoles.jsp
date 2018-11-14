@@ -12,21 +12,41 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
+    
         <h1>Назначение ролей!</h1>
-        <form action="addUserRole" method="POST">
-            <select name="user">
-                <c:forEach var="user" items="${listUsers}">
-                    <option value="${user.id}">${user.login}</option>
-                </c:forEach>
-            </select>
-            <select name="role">
-                <c:forEach var="role" items="${listRoles}">
-                    <option value="${role.id}">${role.name}</option>
-                </c:forEach>
-            </select>
-            <input type="submit" name="setButton" value="Назначить">
-            <input type="submit" name="deleteButton" value="Удалить">
-        </form>
-    </body>
+        <form action="changeUserRole">
+            <table>
+                <tr>
+                    <th>USER</th>
+                    <th>ROLL</th>
+                    <th></th>
+                    <th></th>
+
+               </tr> 
+               <tr>
+                   <td>
+                        <select name="user">
+                            <c:forEach var="entry" items="${mapUsers}">
+                                <option value="${entry.key.id}">${entry.key.login}, roll:${entry.value}</option><!--Map<Reader,rolename> mapUsers = new HashMap<>();-->
+                            </c:forEach>
+                        </select>
+                   </td>
+                   <td>
+                        <select name="role">
+                            <c:forEach var="role" items="${listRoles}">
+                                <option value="${role.id}">${role.name}</option>
+                            </c:forEach>
+                        </select>
+                   </td>
+                   <td><input type="submit" name="setButton" value="Назначить"></td>
+                   <td><input type="submit" name="deleteButton" value="Удалить"></td>
+               </tr>
+            </table>     
+        </form>   
+            
+            
+            
+            
+        
+    
 </html>

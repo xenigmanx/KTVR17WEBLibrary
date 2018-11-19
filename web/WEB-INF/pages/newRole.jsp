@@ -18,8 +18,7 @@
              Имя роли:<br>
             <input type="text" name="nameRole"><br>
             <br>
-            <input type="submit" name="setButton" value="Добавить">
-            <input type="submit" name="deleteButton" value="Удалить">
+            <input type="submit" value="Добавить">
         </form><br>
     </body>
 </html>

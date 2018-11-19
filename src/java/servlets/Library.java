@@ -21,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import session.BookFacade;
 import session.HistoryFacade;
 import session.ReaderFacade;
+import util.EncriptPass;
 import util.PageReturner;
 
 /**
@@ -82,13 +83,19 @@ public class Library extends HttpServlet {
             String password2 = request.getParameter("password2");
             if(!password1.equals(password2)){
               request.setAttribute("info", "Неправильно введен логин или пароль");  
-              request.getRequestDispatcher(PageReturner.getPage("welcome")).forward(request, response);
+              request.getRequestDispatcher(PageReturner.getPage("welcome"))
+                      .forward(request, response);
               break;
             }
-            Reader reader = new Reader(name, surname, phone, city, login, password1);
+            EncriptPass ep = new EncriptPass();
+            String salts = ep.createSalts();
+            String encriptPass = ep.setEncriptPass(password1, salts);
+            Reader reader = new Reader(name, surname, phone, city, login, 
+                    encriptPass,salts);
             readerFacade.create(reader);
             request.setAttribute("reader", reader);
-            request.getRequestDispatcher(PageReturner.getPage("welcome")).forward(request, response);
+            request.getRequestDispatcher(PageReturner.getPage("welcome"))
+                    .forward(request, response);
                 break;
             }
         case "/showBooks":{

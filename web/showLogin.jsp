@@ -1,8 +1,9 @@
 <%-- 
-    Document   : showLogin
-    Created on : Nov 13, 2018, 2:24:41 PM
-    Author     : pupil
+    Document   : takeBooks.jsp
+    Created on : Oct 5, 2018, 10:38:13 AM
+    Author     : Melnikov
 --%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

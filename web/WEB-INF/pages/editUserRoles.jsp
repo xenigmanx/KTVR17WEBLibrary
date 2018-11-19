@@ -1,8 +1,9 @@
 <%-- 
-    Document   : editUserRoles
-    Created on : Nov 7, 2018, 12:35:23 PM
+    Document   : newBook
+    Created on : Sep 26, 2018, 10:50:01 AM
     Author     : Melnikov
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,7 +44,3 @@
         </form>
     </body>
 </html>
-            
-            
-        
-

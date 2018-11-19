@@ -42,6 +42,10 @@ public class Reader {
         this.password = password;
     }
 
+    public Reader(String сидор, String сидоров, String string, String кЯрве, String admin, String encriptPass, String salts) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
    
 
     public String getCity() {

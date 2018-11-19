@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import session.ReaderFacade;
 import session.RoleFacade;
 import session.UserRolesFacade;
+import util.EncriptPass;
 import util.PageReturner;
 
 /**
@@ -43,8 +44,11 @@ public class Secure extends HttpServlet {
     public void init() throws ServletException {
         List<Reader> listReader = readerFacade.findAll();
         if(listReader.isEmpty()){
+            EncriptPass ep = new EncriptPass();
+            String salts = ep.createSalts();
+            String encriptPass = ep.setEncriptPass("admin", salts);
             Reader reader = new Reader("Сидор", "Сидоров", 
-                 "454545454", "К-Ярве", "admin", "admin");
+                 "454545454", "К-Ярве", "admin", encriptPass, salts);
             readerFacade.create(reader);
             Role role = new Role();
             role.setName("ADMIN");
@@ -100,7 +104,10 @@ public class Secure extends HttpServlet {
                     .forward(request, response);
                 break;
             }
-            if(password.equals(regUser.getPassword())){
+            EncriptPass ep = new EncriptPass();
+            String salts = regUser.getSalts();
+            String encriptPass = ep.setEncriptPass(password, salts);
+            if(encriptPass.equals(regUser.getPassword())){
                 session = request.getSession(true);
                 session.setAttribute("regUser", regUser);
                 request.setAttribute("info", "Привет "+regUser.getName()

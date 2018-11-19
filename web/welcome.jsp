@@ -14,8 +14,9 @@
     <body>
         <h1>Навигация по сайту</h1>
         ${info}<br>
+        <br>
         <a href="showLogin">Войти в систему</a><br>
-        <a href="logout">Выйти</a><br>
+        <a href="logout">Выйти из системы</a><br>
         <a href="newBook">добавить книгу</a><br>
         <a href="newReader">добавить читателя</a><br>
         <a href="showBooks">Список книг</a><br>
